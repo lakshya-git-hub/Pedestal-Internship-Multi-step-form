@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Step Form</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animation -->
+<div class="background-animation">
+    <div class="animation-shape shape1"></div>
+    <div class="animation-shape shape2"></div>
+    <div class="animation-shape shape3"></div>
+    <div class="animation-shape shape4"></div>
+  </div>
+  <div class="container">
+    <div class="form-container">
+  <!-- Rest of your existing body content -->
+  <div class="header">
+    <div class="logo-container">
+      <img src="https://pedestaltechnoworld.com/storage/logos/267791692517601.png" alt="Logo" class="header-logo">
+    </div>
+    <h1>Account Registration</h1>
+    <div class="mode-switch">
+      <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider round"></span>
+      </label>
+      <span id="modeText">Dark Mode</span>
+    </div>
+  </div>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="steps">
+          <div class="step active" data-step="1">1</div>
+          <div class="step" data-step="2">2</div>
+          <div class="step" data-step="3">3</div>
+          <div class="step" data-step="4">4</div>
+        </div>
+      </div>
+
+      <form id="multiStepForm">
+        <!-- Step 1: Personal Information -->
+        <div class="form-step" id="step1">
+          <h2>Personal Information</h2>
+          <div class="form-group">
+            <label for="fullName">Full Name <span class="required">*</span></label>
+            <input type="text" id="fullName" name="fullName" autocomplete="name">
+            <div class="error" id="fullNameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span class="required">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <div class="error" id="emailError"></div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+            <div class="error" id="phoneError"></div>
+          </div>
+        </div>
+
+        <!-- Step 2: Account Setup -->
+        <div class="form-step hidden" id="step2">
+          <h2>Account Setup</h2>
+          <div class="form-group">
+            <label for="username">Username <span class="required">*</span></label>
+            <input type="text" id="username" name="username" autocomplete="username">
+            <div class="error" id="usernameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password <span class="required">*</span></label>
+            <div class="password-input-container">
+              <input type="password" id="password" name="password" autocomplete="new-password">
+              <button type="button" id="togglePassword" class="toggle-password">
+                <i class="eye-icon">👁️</i>
+              </button>
+            </div>
+            <div class="error" id="passwordError"></div>
+            <div class="password-strength">
+              <div class="strength-meter">
+                <div class="strength-fill" id="strengthFill"></div>
+              </div>
+              <span id="strengthText">Password strength</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+            <div class="password-input-container">
+              <input type="password" id="confirmPassword" name="confirmPassword" autocomplete="new-password">
+              <button type="button" id="toggleConfirmPassword" class="toggle-password">
+                <i class="eye-icon">👁️</i>
+              </button>
+            </div>
+            <div class="error" id="confirmPasswordError"></div>
+          </div>
+        </div>
+
+        <!-- Step 3: Profile Details -->
+        <div class="form-step hidden" id="step3">
+          <h2>Profile Details</h2>
+          <div class="form-group profile-upload-container">
+            <label for="profilePicture">Profile Picture</label>
+            <div class="profile-upload-centered">
+              <div class="image-preview-container">
+                <img id="imagePreview" src="" alt="Profile preview">
+                <span id="noImageText">No image selected</span>
+              </div>
+              <div class="file-input-container">
+                <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+                <label for="profilePicture" class="file-input-label">Choose a file</label>
+              </div>
+            </div>
+            <div class="error" id="profilePictureError"></div>
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio (Max 250 characters)</label>
+            <textarea id="bio" name="bio" maxlength="250"></textarea>
+            <div class="char-count"><span id="bioCharCount">0</span>/250</div>
+            <div class="error" id="bioError"></div>
+          </div>
+          <div class="form-group">
+            <label>Skills</label>
+            <div class="skills-input-container">
+              <input type="text" id="skillInput" placeholder="Type to search skills">
+              <div id="skillsDropdown" class="skills-dropdown hidden"></div>
+            </div>
+            <div class="selected-skills" id="selectedSkills"></div>
+          </div>
+        </div>
+
+        <!-- Step 4: Review & Submit -->
+        <div class="form-step hidden" id="step4">
+          <h2>Review & Submit</h2>
+          <div class="review-container">
+            <div class="review-section">
+              <h3>Personal Information</h3>
+              <div class="review-item">
+                <span class="review-label">Full Name:</span>
+                <span class="review-value" id="reviewFullName"></span>
+              </div>
+              <div class="review-item">
+                <span class="review-label">Email:</span>
+                <span class="review-value" id="reviewEmail"></span>
+              </div>
+              <div class="review-item">
+                <span class="review-label">Phone:</span>
+                <span class="review-value" id="reviewPhone"></span>
+              </div>
+            </div>
+
+            <div class="review-section">
+              <h3>Account Information</h3>
+              <div class="review-item">
+                <span class="review-label">Username:</span>
+                <span class="review-value" id="reviewUsername"></span>
+              </div>
+              <div class="review-item">
+                <span class="review-label">Password:</span>
+                <span class="review-value">••••••••</span>
+              </div>
+            </div>
+
+            <div class="review-section">
+              <h3>Profile Details</h3>
+              <div class="review-item profile-preview">
+                <span class="review-label">Profile Picture:</span>
+                <img id="reviewProfilePicture" src="" alt="Profile picture">
+                <span id="reviewNoImage">No image uploaded</span>
+              </div>
+              <div class="review-item">
+                <span class="review-label">Bio:</span>
+                <p class="review-value" id="reviewBio"></p>
+              </div>
+              <div class="review-item">
+                <span class="review-label">Skills:</span>
+                <div class="review-value" id="reviewSkills"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Navigation -->
+        <div class="form-nav">
+          <button type="button" id="prevBtn" class="btn secondary hidden">Previous</button>
+          <button type="button" id="nextBtn" class="btn primary">Next</button>
+          <button type="button" id="submitBtn" class="btn primary hidden">Submit</button>
+        </div>
+      </form>
+
+      <!-- Success Message -->
+      <div id="successMessage" class="success-message hidden">
+        <div class="success-icon">✓</div>
+        <h2>Registration Successful!</h2>
+        <p>Your account has been created successfully.</p>
+        <button id="startOverBtn" class="btn primary">Start Over</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
